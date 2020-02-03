@@ -4,5 +4,11 @@ tmp
 bak
 .vscode
 build
-node_module
+node_modules
 
+vsc-extension-quickstart.md
+jsconfig.json
+.eslintrc.js*
+package-lock.json
+.postcssrc.*
+.editorconfig
