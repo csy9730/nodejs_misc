@@ -2,6 +2,11 @@
 
 vue是典型地MVVC架构。
 
+## core
+
+入口是html文件，包含vue模板部分
+然后是js入口文件，实现import vue，构造vue对象，通过绑定html模板和数据实现渲染。
+
 ## demo
 vue编程分为js部分和html模板部分。
 js部分定义vue对象，内嵌了json结构的data和el字符串。

@@ -14,6 +14,27 @@ $ npm install && npm start
 **Q**: This is probably not a problem with npm. There is likely additional logging output above. 
 **A**: 
 
+## overview
+
+### static
+
+* main.js
+* package.json
+* preload.js
+* renderer.js
+* index.html
+
+### dynamic
+使用npm start，执行运行的流程如下：
+
+1. 执行`npm start`
+2. 检查package.json，获取入口js：main.js
+3. 执行main.js，获取index.html
+4. 执行index.html，显示界面
+
+
+## misc
+
 ```
 npm ERR! code ELIFECYCLE
 npm ERR! errno 1

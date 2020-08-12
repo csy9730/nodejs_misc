@@ -1,3 +1,5 @@
+# vue_demo_todo
+
 下面是一个简单的 todo 列表的完整例子：
 <div id="todo-list-example">
   <form v-on:submit.prevent="addNewTodo">
@@ -19,8 +21,10 @@
     ></li>
   </ul>
 </div>
+```
 注意这里的 is="todo-item" 属性。这种做法在使用 DOM 模板时是十分必要的，因为在 <ul> 元素内只有 <li> 元素会被看作有效内容。这样做实现的效果与 <todo-item> 相同，但是可以避开一些潜在的浏览器解析错误。查看 DOM 模板解析说明 来了解更多信息。
 
+``` js
 Vue.component('todo-item', {
   template: '\
     <li>\
@@ -61,3 +65,4 @@ new Vue({
     }
   }
 })
+```
