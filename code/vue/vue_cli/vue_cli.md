@@ -46,6 +46,7 @@ Documentation can be found at [https://vuejs-templates.github.io/webpack](https:
 node js的入口是 package.json
 实际入口文件index.html，
 项目入口文件是src/main.js
+webpack把main.js，app.vue打包之后会生成app.js。
 
 vue3中，indexhtml移到了public/index.html
 main.js中记录index.html的appid，绑定了main.vue组件。

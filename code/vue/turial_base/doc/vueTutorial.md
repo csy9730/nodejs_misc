@@ -10,7 +10,7 @@ vue是典型地MVVC架构。
 ## demo
 vue编程分为js部分和html模板部分。
 js部分定义vue对象，内嵌了json结构的data和el字符串。
-html5端的div通过id绑定vue::el实现渲染，data指定一个嵌套字典，div通过双大括号{{attr}}的形式访问data.attr，生成绑定。
+html5端的div通过id绑定vue::el实现渲染，data指定一个json字典，div通过双大括号{{attr}}的形式访问data.attr，生成绑定。
 methods是一个字典，包含多个函数，用于渲染动态生成的数据。
 运行时改变vue内置变量的值，会立刻改变html，重新部分渲染生成的显示结果。
 
