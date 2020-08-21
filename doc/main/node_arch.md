@@ -102,3 +102,4 @@ npx github:piuccio/cowsay hello
 npx http-server
 
 ```
+就是运行的时候，会到 node_modules/.bin 路径和环境变量 $PATH 里面，检查命令是否存在。

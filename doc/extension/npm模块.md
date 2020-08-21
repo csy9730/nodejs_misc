@@ -6,3 +6,6 @@ electron
 electron-vue 
 
 devtron 和 electron-builder 
+
+grunt、gulp、jquery、requirejs、
+angular、react、vue
