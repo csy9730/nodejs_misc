@@ -22,3 +22,11 @@ package.json 位于模块的目录下，用于定义包的属性。接下来让�
 
 npm cache clean
 npm install
+
+### update
+```
+npm install -g npm
+
+# 想更新到指定版本，运行指令
+npm -g install npm@6.8.0
+```
