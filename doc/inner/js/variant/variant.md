@@ -1,6 +1,4 @@
-# javascript
-
-## base
+# variant
 
 ### datatype
 
@@ -13,6 +11,8 @@
 * object
 * function
 
+
+#### typeof
 使用typeof 可以判断类型
 ``` js
 typeof  "a string"  
@@ -32,6 +32,7 @@ gettype.call(function(){})  // 输出     [object Function]
 [].constructor==Array // true
 ```
 #### number
+
 ``` js
 var x=100  
 var a = x.toString()  
@@ -51,6 +52,7 @@ n.toPrecision(4); // "1.235e+5"
 
 Math.floor(5/2)  // c.向下取整 
 ```
+
 #### 字符串
 ``` js
 var path = "abc/def/ghi"
@@ -83,6 +85,22 @@ str_arr = split(' ')
 需要注意的是，JavaScript 的字符串是不可变的（immutable），String 类定义的方法都不能改变字符串的内容。像 String.toUpperCase() 这样的方法，返回的是全新的字符串，而不是修改原始字符串。
 
 #### array
+
+``` js
+map
+filter
+forEach
+every
+some 
+
+slice
+splice
+push
+pop
+indexOf
+lastIndexOf()
+```
+
 
 ``` js
 var arr = new Array("js","JavaScript","jQuery");
@@ -155,95 +173,114 @@ for(var  key in data ){
 data.hasOwnProperty("class2"); 
 
 ```
+
+
+### object
+object.prototype
+
+管理getter和setter
+``` js
+Object.toString()
+Object.toLocalString()
+Object.toJSON()
+Object.valueOf()
+Object.defineProperty()
+Object.create() // 创建一个对象
+
+seal()
+freeze()
+```
+#### object 访问
+object的(.) 和[]都可以访问属性， 其中"."是静态访问（脚本时确定属性名）， 【】是动态访问（先执行表达式确定属性名再访问属性值），所以【】支持特殊关键字/保留字。
+
+#### this 关键词
+在 JavaScript 中，被称为 this 的事物，指的是拥有该 JavaScript 代码的对象。
+
+this 的值，在函数中使用时，是“拥有”该函数的对象。
+
+请注意 this 并非变量。它是关键词。您无法改变 this 的值。
+
+### method
+通过引入this，使方法和对象分离，this对应一个scope，也引申出了闭包。
+
+全局函数默认的this指向全局对象。
+
+``` js
+var calculator = {
+    oper: 1,
+    oper2: 2,
+    add: function(){
+        this.result = this.oper + this.oper2;
+    }
+}
+
+calculator.add();
+
+```
+
+嵌套函数中，内层函数不会自动获得外层函数的this。需要显式引入this
+
+```js
+var o = {
+    m: function(){
+        var self = this;
+        console.log(this==9);
+        f();
+        function f(){
+            console.log( this === o); // ==> false
+            console.log(self === o); // ==> true
+        }
+    }
+}
+
+o.m();
+```
+
+#### 即时值
+即时值，包括 1，2这种数据类型，字符串类型，null等，只能作为右值，
+即时值和object有区别， wrapped object
+
+
 #### type transfer
 
 在布尔类型环境中undefined, 0, "", NaN, null会被转换成 false。
 
-### function
 
-js 的运行中，如果IO函数是异步的，例如等待文件IO，执行定时器动作，都会跳过等待过程，执行以下语句。
+js的类型判断非常混乱，让人头大。例如：nan ，undefined，null，
+
+## var
+
+#### var
+var 定义变量，会前置定义
+
+
+保留字不能作为变量名
+
+#### scope 
+scope 分为 全局域和函数域两种。
+#### new
+new运算符
+### misc
+delete 不能删除var定义的全局变量
+
+
+with 可以挂载变量，改变变量的作用域
+
+const
+
+解构赋值
 ``` js
-function funca() {
-	console.log("before call")
-	fileDialog.open() 
-	console.log("after call")
-}
-```
-
-#### argument
-
-
-
-变长参数
-``` js
-function sum2(x,y,z){
-	var s = 0;
-	if(z)
-		s+=z;
-	if (y)
-		s+=y;
-	s+=x;
-	return s;
-}
-sum2(3,4,5);
-
-
-var alert = console.log;
-function sum(){
-	var x = 0;
-	for(var i=0;i<arguments.length;i++ ){
-		x += arguments[i];
-	}
-	alert( x )
-}
-sum(1,2,3,4,5,6,7,8,9,10,11,12);
-```
-默认参数
-``` js
-function foo(num1) {
-if (num1 === undefined) {
-num1 = 9;
-}
-console.log(num1);
-}
-foo();
-```
-
-javascript6支持以下写法
-``` js
-function foo(num1 =9) {
-console.log(num1);
-}
-foo();
-```
-
-
-当函数执行完后,默认执行return undefined
-
-#### base function
-
-
-
-``` js
-var numbers = [1, 2, 3, 4];
-Math.max.apply(null, numbers) // 4
-Math.min.apply(null, numbers) // 1
-
-Math.random()
-Math.cos()
-Math.abs()
+let [x,y] = [1,2]
+[x,y] = [x+1, y+1]
+[x,y] =[y,x]
 
 ```
+#### let
 
-#### json
+#### var let
+var 是 lazy evaluation / let 是eager evalation  
 
-``` js
-doc = '[{"name": "张三","sex": "男","email": "zhangsan@123.com"},{"name": "李四","sex": "男","email": "lisi@123.com" },{"name": "王五",  "sex": "女", "email": "wangwu@123.com"    }]'
-var json = JSON.parse(doc);                
-console.log(json)
+### define
+通过var定义函数，只会前置变量名，不能前置匿名函数。
 
-console.log(json[0].["name"])
-console.log(json[0].name);
-var jdoc = JSON.stringify(json);
-
-```
+也可以使用 Function 定义函数，此时行为类似 eval。

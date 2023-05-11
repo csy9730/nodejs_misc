@@ -1,5 +1,7 @@
 # window
 
+BOM（browser object model）；浏览器对象模型，提供一些属性和方法可以操作浏览器
+
 ## window
 ## document
 

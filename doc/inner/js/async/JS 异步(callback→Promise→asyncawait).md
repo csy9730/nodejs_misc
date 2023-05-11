@@ -11,7 +11,7 @@ JS三座大山：原型原型链、作用域闭包、同步异步。
 
 **思考（案例来自stackoverflow）：**
 
-```
+``` js
 function foo(){
     var result;
     $ajax({
@@ -65,7 +65,7 @@ foo(myCallback);
 
 **2.Promise**
 
-```
+``` js
 function ajax(url){
     return new Promise(function(resolve,reject){
         var xhr=new XMLHttpRequest();
@@ -116,7 +116,7 @@ Promise的缺点：
 很多人说async/await是异步编程的终极解决方案、
 JavaScript 的 async/await 实现，离不开 Promise。
 
-```
+``` js
 var superagent=require('superagent')
 function delay(){
     return new Promise(function(resolve,reject){
@@ -154,7 +154,7 @@ getAllBooks()
 
 async/await并不会取代promise，因为async/await底层依然使用promise。
 
-```
+``` js
 async function getABC(){
     let A = await getValueA(); // getValueA 花费 2 秒
     let B = await getValueB(); // getValueA 花费 4 秒
@@ -165,7 +165,7 @@ async function getABC(){
 
 每次遇到 await 关键字时，Promise 都会停下在，一直到运行结束，所以总共花费是 2+4+3 = 9 秒。await 把异步变成了同步。
 
-```
+``` js
 async function getABC() {
     // Promise.all() 允许同时执行所有的异步函数
     let results = await Promise.all([ getValueA, getValueB, getValueC ]); 
