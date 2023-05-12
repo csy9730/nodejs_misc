@@ -88,8 +88,9 @@ new Vue({
 ![234234](https://cn.vuejs.org/images/lifecycle.png)
 
 
-v-html
-v-once
+#### v-html
+#### v-once
+#### v-bind
 Mustache 语法不能作用在 HTML 特性上，遇到这种情况应该使用 v-bind 指令：
 
 ，我们一直都只绑定简单的属性键值。但实际上，对于所有的数据绑定，Vue.js 都提供了完全的 JavaScript 表达式支持。
@@ -132,7 +133,7 @@ var vm = new Vue({
 ```
 我们可以将同一函数定义为一个方法而不是一个计算属性。两种方式的最终结果确实是完全相同的。然而，不同的是计算属性是基于它们的响应式依赖进行缓存的。只在相关响应式依赖发生改变时它们才会重新求值。这就意味着只要 message 还没有发生改变，多次访问 reversedMessage 计算属性会立即返回之前的计算结果，而不必再次执行函数。
 这也同样意味着下面的计算属性将不再更新，因为 Date.now() 不是响应式依赖：
-```
+``` js
 computed: {
   now: function () {
     return Date.now()

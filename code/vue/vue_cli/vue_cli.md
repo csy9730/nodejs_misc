@@ -134,6 +134,7 @@ dist/
         * vendor.js
     * css
         * app.css
+
 ### 流程
 node js的入口是 package.json ,包含了：`{"scripts": {"dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js"}}`
 

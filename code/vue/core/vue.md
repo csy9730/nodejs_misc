@@ -1,17 +1,24 @@
 # vue
 
 vue 分为  html 和js 两部分。
-### js
+
+- js
+- html
+
+
+## js
 js 部分 包括：data， 方法 methods，缓存的计算方法 computed， 监视器(watch)，hooks (created)
 v-bind:class, v-bind:style
 
 - 属性 data， 
 - 定义的函数方法 methods，
 - 缓存的计算方法 computed， 
-- 监视器 (watch)，
+- 监视器 watch，
 - 钩子函数 hooks (created)
+- 绑定对象 el
 
 #### data
+data 描述网页填充的内容，一般是对象。
 
 data 可以不是一个对象，而是一个函数。
 
@@ -60,41 +67,31 @@ document.write('url: ' + vm.url);
 
 我们可以通过 watch 来响应数据的变化。
 
-#### 钩子函数
+### Vue类
 
-指令定义函数提供了几个钩子函数（可选）：
-
-bind: 只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个在绑定时执行一次的初始化动作。
-
-inserted: 被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于 document 中）。
-
-update: 被绑定元素所在的模板更新时调用，而不论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新（详细的钩子函数参数见下）。
-
-componentUpdated: 被绑定元素所在模板完成一次更新周期时调用。
-
-unbind: 只调用一次， 指令与元素解绑时调用。
-
-
-### html
+## html
 html 包括： v-bind， v-if， v-for，v-on 触发器， v-show, v-html, {{var}}
 v-model, key <keep-alive> , v-slot v-once
 事件修饰符
 
-- v-bind，  `<pre><a v-bind:href="url">教程</a></pre>`
+- v-bind 为元素绑定属性，  `<pre><a v-bind:href="url">教程</a></pre>`
 - v-if，  根据条件展示元素  `v-if="seen"`
 - v-for， `<li v-for="site in sites">{{ site.name }}</li>`
 - v-on 触发器，监听事件，并对用户的输入进行响应 `<a v-on:click="doSomething">`
 - v-show, `<h1 v-show="ok">Hello!</h1>`
 -  v-html, 变量转字符串转html, `<div v-html="message"></div>`
-- {{var}} 变量转字符串，不改变html结构
+- 模板变量 {{var}} 变量转字符串，不改变html结构
 - v-model `<input v-model="message">`  来实现双向数据绑定
 - 过滤器 `{{ message | capitalize }}`
 - 过滤器 `<div v-bind:id="rawId | formatId"></div>`
-- `{{#if ok}}  <h1>Yes</h1>{{/if}}`
+- 模板if  `{{#if ok}}  <h1>Yes</h1>{{/if}}`
 - v-else `<div v-if="Math.random() > 0.5">Sorry</div> <div v-else> Not sorry</div>`
 - v-else-if 在 2.1.0 新增
 
+这些v指令，非常神奇，可以接字符串，该字符串语法类似js，也能包含html，属于介于js和html两者之间的私有语言。
+
 #### v-for
+v-for 遍历列表
 ``` html
 <div id="app">
   <ol>
@@ -117,7 +114,9 @@ new Vue({
 })
 </script>
 ```
+
 #### v-for dict
+v-for 遍历字典
 ``` html
 <div id="app">
   <ul>
@@ -143,6 +142,7 @@ v-for 也可以循环整数
 #### v-bind
 实例中将 isActive 设置为 true 显示了一个绿色的 div 块，如果设置为 false 则不显示：
 
+布尔型数据填充
 ```html
 
 <div v-bind:class="{ 'active': isActive }"></div>
@@ -152,7 +152,10 @@ v-for 也可以循环整数
 ``` html
 <div class="active"></div>
 ```
+
 #### v-bind style
+字符串，整型数据填充
+
 ``` html
 <div id="app">
     <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }">菜鸟教程</div>
@@ -184,7 +187,7 @@ new Vue({
 </script>
 ```
 #### 事件修饰符
-Vue.js 为 v-on 提供了事件修饰符来处理 DOM 事件细节，如：event.preventDefault() 或 event.stopPropagation()。
+Vue.js 为 v-on 提供了事件修饰符来处理 DOM 事件细节，如：`event.preventDefault()` 或 `event.stopPropagation()`。
 
 Vue.js 通过由点 . 表示的指令后缀来调用修饰符。
 
@@ -213,7 +216,7 @@ Vue 允许为 v-on 在监听键盘事件时添加按键修饰符：
 ```
 
 
-#### v-model
+### v-model
 ``` html
 <div id="app">
   <p>input 元素：</p>
@@ -242,15 +245,15 @@ new Vue({
 - 下拉列表
 
 
-#### 修饰符
-.lazy
+### 修饰符
+#### .lazy
 在默认情况下， v-model 在 input 事件中同步输入框的值与数据，但你可以添加一个修饰符 lazy ，从而转变为在 change 事件中同步：
 ``` html
 <!-- 在 "change" 而不是 "input" 事件中更新 -->
 <input v-model.lazy="msg" >
 ```
 
-.number
+#### .number
 如果想自动将用户的输入值转为 Number 类型（如果原值的转换结果为 NaN 则返回原值），可以添加一个修饰符 number 给 v-model 来处理输入值：
 ``` html
 <input v-model.number="age" type="number">
@@ -264,11 +267,29 @@ new Vue({
 <input v-model.trim="msg">
 ```
 
-#### 自定义指令
+### 自定义指令
 除了默认设置的核心指令( v-model 和 v-show ), Vue 也允许注册自定义指令。
 
+自定义指令在js部分注册，在html部分使用。
 
-### 核心机制
+#### 自定义指令的生命周期
+
+自定义指令的生命周期都对应有触发函数（钩子函数）
+
+指令定义函数提供了几个钩子函数（可选）：
+
+bind: 只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个在绑定时执行一次的初始化动作。
+
+inserted: 被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于 document 中）。
+
+update: 被绑定元素所在的模板更新时调用，而不论绑定值是否变化。通过比较更新前后的绑定值，可以忽略不必要的模板更新（详细的钩子函数参数见下）。
+
+componentUpdated: 被绑定元素所在模板完成一次更新周期时调用。
+
+unbind: 只调用一次， 指令与元素解绑时调用。
+
+
+#### 核心机制
 
 当一个 Vue 实例被创建时，它向 Vue 的响应式系统中加入了其 data 对象中能找到的所有的属性。当这些属性的值发生改变时，html 视图将也会产生相应的变化。
 
@@ -296,8 +317,47 @@ new Vue({
 })
 </script>
 ```
-### Vue类
-#### 组件系统
+
+
+
+``` html
+<div id='app'>
+  <input type="text" v-model="inputValue" v-focus>
+</div>
+<script>
+  Vue.directive('focus', {
+    // 第一次绑定元素时调用
+    bind () {
+      console.log('bind')
+    },
+    // 当被绑定的元素插入到 DOM 中时……
+    inserted: function (el) {
+      console.log('inserted')
+      el.focus()
+    },
+    // 所在组件VNode发生更新时调用
+    update () {
+      console.log('update')
+    },
+    // 指令所在组件的 VNode 及其子 VNode 全部更新后调用
+    componentUpdated () {
+      console.log('componentUpdated')
+    },
+    // 只调用一次，指令与元素解绑时调用
+    unbind () {
+      console.log('unbind')
+    }
+  })
+  new Vue({
+    data: {
+      inputValue: ''
+    }
+  }).$mount('#app')
+</script>
+```
+
+
+## 组件系统
 
 组件（Component）是 Vue.js 最强大的功能之一。
 
@@ -375,6 +435,8 @@ new Vue({
 </script>
 ```
 新建一个局部组件，并且绑定到div。
+
+
 #### Prop
 prop 是子组件用来接受父组件传递过来的数据的一个自定义属性。
 
@@ -445,7 +507,32 @@ Vue.set 方法用于设置对象的属性，它可以解决 Vue 无法检测添�
 
 #### Vue.delete
 Vue.delete 用于删除动态添加的属性
-### third lib
+
+
+### vue文件
+Vue自定义了一种后缀名名字为`.vue`文件,它将`html`, `js`, `css` 整合成一个文件,和里面 `template` `script` `style`三个区别分别依次对应。
+
+``` html
+<template>
+<!--这里写 html -->
+<template/>
+<script>
+  export default {};
+  // 这里写js
+</script>
+<style lang = "less" scoped>
+  <!--这里写css-->
+</style>
+```
+
+- 一个`.vue` 文件就等于单独组件。因为`.vue`文件是自定义的，浏览器不识别，所以要对该文件进行解析,在webpack构建中，需要安装vue-loader 对.vue文件进行解析。
+- `template`里面最外层必须是只有一个容器
+- `script` 中的 `export default {}` 即导出这个组件，外部可以引用。
+- `style` 中的 `lang` 指额外表示支持的语言可以让编辑器识别,`scoped` 指这里写的css只适用于该组件。
+
+
+## third lib
+
 #### axios
 Vue.js 2.0 版本推荐使用 axios 来完成 ajax 请求。
 
@@ -454,6 +541,7 @@ Axios 是一个基于 Promise 的 HTTP 库，可以用在浏览器和 node.js �
 Github开源地址： https://github.com/axios/axios
 #### Vue Router
 vue-router
+
 #### mixins
 
 混入 (mixins)定义了一部分可复用的方法或者计算属性。混入对象可以包含任意组件选项。当组件使用混入对象时，所有混入对象的选项将被混入该组件本身的选项。
