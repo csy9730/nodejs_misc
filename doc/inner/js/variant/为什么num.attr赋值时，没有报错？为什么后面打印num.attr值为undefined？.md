@@ -1,7 +1,7 @@
 ## 为什么num.attr赋值时，没有报错？为什么后面打印num.attr值为undefined？
 
 ```javascript
-javascript复制代码const num = 42;
+const num = 42;
 num.attr = 'str';
 console.log(num.attr); // undefined
 ```
@@ -9,8 +9,7 @@ console.log(num.attr); // undefined
 我们首先要知道JavaScript中的基本类型有哪些？
 
 ```javascript
-javascript
-复制代码// number, string, boolean, undefine, null, symbol, bigint
+// number, string, boolean, undefine, null, symbol, bigint
 ```
 
 上面这些原始值通过字面量的方式创建的时候没有方法和属性，我们如果需要使用它们就必须使用包装器，而自动装箱就是为了解决这一问题的。
@@ -26,7 +25,7 @@ javascript
 - 拆箱，销毁这个实例 代码表示就是：
 
 ```javascript
-javascript复制代码const num = 42;
+const num = 42;
 cosnt _num = New Number(42); // 创建num的临时实例对象
 _num.attr = 'str'; // 给这个对象增加属性attr并赋值‘str’
 _null = null; // 销毁这个实例
@@ -39,7 +38,7 @@ _null = null; // 销毁这个实例
 我们可以通过`new`操作符来完成手动装箱，例如:
 
 ```javascript
-javascript复制代码new Number(123);
+new Number(123);
 new String('str');
 New Boolean(true);
 ```
@@ -47,7 +46,7 @@ New Boolean(true);
 不过要慎重使用手动装箱，可能会有意外的效果，比如：
 
 ```javascript
-javascript复制代码const bool = new Boolean(false);
+const bool = new Boolean(false);
 if (bool) {
     console.log('执行了true');
 } else {
@@ -59,7 +58,7 @@ if (bool) {
 此时`bool`的值是`false`，但是`new Boolean`返回的对象是真值，你可以通过下面这样解决这个问题：
 
 ```javascript
-javascript复制代码...
+...
 if (bool.valueOf())
 ...
 ```
@@ -69,7 +68,7 @@ if (bool.valueOf())
 上面有提到拆箱，也是存在自动拆箱和手动拆箱，当自动装箱完成，临时实例对象会调用`.valueOf()`或`.toString()`来返回原始值。当然你也可以手动调用，实现手动拆箱，如下：
 
 ```javascript
-javascript复制代码const numObj = new Number(1122);
+const numObj = new Number(1122);
 const strObj = new String('str');
 console.log(typeof numObj); // ‘object’
 console.log(typeof strObj); // ‘object’

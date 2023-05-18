@@ -25,7 +25,7 @@
 ### 无返回值
 
 ```js
-js复制代码function Person(name) {
+function Person(name) {
   this.name = name;
 }
 
@@ -38,7 +38,7 @@ console.log(obj);
 ### 返回对象
 
 ```js
-js复制代码function Person(age) {
+function Person(age) {
   this.age = age;
   return { name: "Jalenl" };
 }
@@ -52,7 +52,7 @@ console.log(obj);
 ### 返回非对象
 
 ```js
-js复制代码function Person(age) {
+function Person(age) {
   this.age = age;
   return 1;
 }
@@ -66,7 +66,7 @@ console.log(obj);
 ### 没有属性绑定+返回非对象
 
 ```js
-js复制代码function Person(){
+function Person(){
     return 1
 }
 new Person()
@@ -118,7 +118,7 @@ new Person()
 普通函数创建时，引擎会按照特定的规则为这个函数创建一个`prototype`属性（指向原型对象）。默认情况下，所有原型对象自动获得一个名为 `constructor` 的属性，指回与之关联的构造函数。
 
 ```js
-js复制代码function Person(){
+function Person(){
     this.age = 18;
 }
 Person.prototype
@@ -133,7 +133,7 @@ Person.prototype
 创建箭头函数时，引擎不会为其创建`prototype`属性，箭头函数没有`constructor`供`new`调用，因此使用`new`调用箭头函数会报错！
 
 ```js
-js复制代码const Person = ()=>{}
+const Person = ()=>{}
 new Person()//TypeError: Foo is not a constructor
 ```
 
@@ -146,7 +146,7 @@ new Person()//TypeError: Foo is not a constructor
 3. 构造函数返回的最后结果是引用数据类型。
 
 ```js
-js复制代码function _new(constructor, ...args) {
+function _new(constructor, ...args) {
     // 构造函数类型合法判断
     if(typeof constructor !== 'function') {
       throw new Error('constructor must be a function');

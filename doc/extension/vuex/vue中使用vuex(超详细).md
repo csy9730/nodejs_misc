@@ -16,30 +16,24 @@ vuex是一个专为 Vue.js 应用程序开发的**状态管理模式**， 采用
 
 要点:
 
-1.vue官方搭配,专属,有专门的调试工具
-
-2.数据变化是可预测的(响应式)
-
-3.**集中式**管理数据状态方案
+1. vue官方搭配,专属,有专门的调试工具
+2. 数据变化是可预测的(响应式)
+3. **集中式**管理数据状态方案
 
 ![vue11.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa98f16ce41a4e04b3fc19982a3c307d~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp?)
 
 ## vuex的学习内容
 
-1.state 统一定义管理公共数据
-
-2.mutations: 使用它来修改数据
-
-3.getters: 类似于vue中的计算属性
-
-4.actions: 类似于methods,用于发起异步请求,比如axios
-
-5.modules: 模块拆分
+1. state 统一定义管理公共数据
+2. mutations: 使用它来修改数据
+3. getters: 类似于vue中的计算属性
+4. actions: 类似于methods,用于发起异步请求,比如axios
+5. modules: 模块拆分
 
 其中最重要的内容为**state**和**mutations**
 
 ```javascript
-javascript复制代码import Vue from 'vue'
+import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 export default new Vuex.Store({
@@ -67,9 +61,8 @@ export default new Vuex.Store({
 
 1.安装
 
-```css
-css
-复制代码npm i vuex
+```bash
+npm i vuex
 ```
 
 2.实例化store
@@ -77,7 +70,7 @@ css
 新建store文件夹,在该文件夹下建index.js文件
 
 ```javascript
-javascript复制代码import Vue from 'vue'
+import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
@@ -93,7 +86,7 @@ export default store
 3.在vue实例中,注入store
 
 ```javascript
-javascript复制代码// 省略其他
+// 省略其他
 // 1. 导入store
 import store from './store' 
 
@@ -118,10 +111,10 @@ new Vue({
 注意点
 
 1. 要修改vuex中的数据,就要使用mutations去修改
-2. 在methods里面$store.state.xxx = xxx这种方式虽然可以直接修改数据,但是vue不推荐,并且在严格模式下通过这种方式修改数据,会直接报错
+2. 在methods里面`$store.state.xxx = xxx`这种方式虽然可以直接修改数据,但是vue不推荐,并且在严格模式下通过这种方式修改数据,会直接报错
 
-```php
-php复制代码export default new Vuex.Store({
+``` js
+export default new Vuex.Store({
   state: {
     num: 100,
     userinfo: {
@@ -134,7 +127,7 @@ php复制代码export default new Vuex.Store({
       state.num = newval
     },
   }
-javascript复制代码methods: {
+methods: {
     btn() {
       this.$store.state.num = 200 //不推荐这种写法,vuex所有修改数据都要写在mutations里
     },
@@ -150,7 +143,7 @@ javascript复制代码methods: {
 在vuex中配置getters
 
 ```javascript
-javascript复制代码new Vuex.store({
+new Vuex.store({
   // 省略其他...
   getters: {
     // state 就是上边定义的公共数据state
@@ -182,7 +175,7 @@ vuex中维护公共数据主要有两个要点
 定义格式:
 
 ```javascript
-javascript复制代码new Vuex.store({
+new Vuex.store({
   // 省略其他...
   actions: {
     // context对象会自动传入，它与store实例具有相同的方法和属性
@@ -207,7 +200,7 @@ javascript复制代码new Vuex.store({
 - 在组件中通过`this.$store.dispatch('actions的名字', 参数)`来调用action
 
 ```javascript
-javascript复制代码// 发ajax请求，从后端获取数据，再来去修改state中的数据
+// 发ajax请求，从后端获取数据，再来去修改state中的数据
     actions: {
       getBooks (context, params) {
         console.log('getbooks的查询参数是', params)
@@ -241,8 +234,8 @@ javascript复制代码// 发ajax请求，从后端获取数据，再来去修改
 
 拆分模板，把复杂的场景按模块来拆开
 
-```php
-php复制代码export default new Vuex.Store({
+``` js
+export default new Vuex.Store({
   // state: 用来保存所有的公共数据
   state: {},
   getters: {},
@@ -273,7 +266,7 @@ php复制代码export default new Vuex.Store({
 也可以进一步对文件进行拆分
 
 ```lua
-lua复制代码|--store /
+|--store /
 |------- index.js # 引入模块
 |------- modules
 |-------------- / mod1.js # 模块1
@@ -285,7 +278,7 @@ lua复制代码|--store /
 - 访问模块中的数据，要加上模块名
 
 ```bash
-bash复制代码获取数据项：  {{$store.state.模块名.数据项名}}
+获取数据项：  {{$store.state.模块名.数据项名}}
 获取getters： {{$store.getters['模块名/getters名']}}
 ```
 
@@ -295,7 +288,7 @@ bash复制代码获取数据项：  {{$store.state.模块名.数据项名}}
 - 如果namespaced为false，则不需要额外补充模块名
 
 ```bash
-bash复制代码$store.commit('mutations名')        // namespaced为false
+$store.commit('mutations名')        // namespaced为false
 $store.commit('模块名/mutations名')  // namespaced为true
 ```
 
@@ -318,7 +311,7 @@ $store.commit('模块名/mutations名')  // namespaced为true
 #### 映射
 
 ```javascript
-javascript复制代码// 1. 导入辅助函数mapState，它是在vuex中定义的一个工具函数。
+// 1. 导入辅助函数mapState，它是在vuex中定义的一个工具函数。
 //  es6 按需导入 import { mapState } from 'vuex' 
 import { mapState } from 'vuex'
 
@@ -334,7 +327,7 @@ computed: {
 示例
 
 ```javascript
-javascript复制代码// 步骤
+// 步骤
 // 1. 导入辅助函数mapState，它是在vuex中定义的一个工具函数。
 //  es6 按需导入 import { mapState } from 'vuex' 
 import { mapState } from 'vuex'
@@ -379,8 +372,8 @@ vuex中的数据与本组件内的数据名相同,我们可以使用`...mapState
 
 - map辅助函数：
 
-  ```css
-  css复制代码computed: { 
+  ``` js
+computed: { 
     ...mapState(['xxx']), 
     ...mapState({'新名字': 'xxx'})
   }
@@ -392,12 +385,12 @@ vuex中的数据与本组件内的数据名相同,我们可以使用`...mapState
 
 - map辅助函数：
 
-  ```arduino
-  arduino复制代码computed: { 
-    ...mapState('模块名', ['xxx']), 
-    ...mapState('模块名', {'新名字': 'xxx'})
-  }
-  ```
+```js
+computed: { 
+  ...mapState('模块名', ['xxx']), 
+  ...mapState('模块名', {'新名字': 'xxx'})
+}
+```
 
 ### 如何使用全局getters
 
@@ -405,12 +398,12 @@ vuex中的数据与本组件内的数据名相同,我们可以使用`...mapState
 
 - map辅助函数：
 
-  ```css
-  css复制代码computed: { 
-    ...mapGetters(['xxx']), 
-    ...mapGetters({'新名字': 'xxx'})
-  }
-  ```
+```js
+computed: { 
+  ...mapGetters(['xxx']), 
+  ...mapGetters({'新名字': 'xxx'})
+}
+```
 
 ### 如何使用modules中的getters
 
@@ -418,12 +411,12 @@ vuex中的数据与本组件内的数据名相同,我们可以使用`...mapState
 
 - map辅助函数：
 
-  ```arduino
-  arduino复制代码computed: { 
+``` js
+computed: { 
     ...mapGetters('模块名', ['xxx']), 
     ...mapGetters('模块名',{'新名字': 'xxx'})
   }
-  ```
+```
 
 ### 如何使用全局mutations
 
@@ -431,12 +424,12 @@ vuex中的数据与本组件内的数据名相同,我们可以使用`...mapState
 
 - map辅助函数：
 
-  ```css
-  css复制代码methods: { 
+``` js
+methods: { 
     ...mapMutations(['mutation名']), 
     ...mapMutations({'新名字': 'mutation名'})
-  }
-  ```
+}
+```
 
 ### 如何使用modules中的mutations（namespaced:true）
 
@@ -444,12 +437,12 @@ vuex中的数据与本组件内的数据名相同,我们可以使用`...mapState
 
 - map辅助函数：
 
-  ```matlab
-  matlab复制代码methods: { 
+``` js
+methods: { 
     ...mapMutations('模块名', ['xxx']), 
     ...mapMutations('模块名',{'新名字': 'xxx'})
-  }
-  ```
+}
+```
 
 ### 如何使用全局actions
 
@@ -457,12 +450,12 @@ vuex中的数据与本组件内的数据名相同,我们可以使用`...mapState
 
 - map辅助函数：
 
-  ```css
-  css复制代码methods: { 
+``` js
+methods: { 
     ...mapActions(['actions名']), 
     ...mapActions({'新名字': 'actions名'})
   }
-  ```
+```
 
 ### 如何使用modules中的actions（namespaced:true）
 
@@ -470,8 +463,8 @@ vuex中的数据与本组件内的数据名相同,我们可以使用`...mapState
 
 - map辅助函数：
 
-  ```matlab
-  matlab复制代码methods: { 
+  ``` js
+methods: { 
     ...mapActions('模块名', ['xxx']), 
     ...mapActions('模块名',{'新名字': 'xxx'})
   }

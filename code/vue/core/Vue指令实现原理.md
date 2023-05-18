@@ -20,7 +20,7 @@
 官网案例：
 
 ```html
-html复制代码<div id='app'>
+<div id='app'>
   <input type="text" v-model="inputValue" v-focus>
 </div>
 <script>
@@ -62,7 +62,7 @@ html复制代码<div id='app'>
 初始化全局`API`时，在`platforms/web`下，调用`createPatchFunction`生成`VNode`转换为真实`DOM`的`patch`方法，初始化中比较重要一步是定义了与`DOM`节点相对应的`hooks`方法，在`DOM`的创建(`create`)、激活(`avtivate`)、更新(`update`)、移除(`remove`)、销毁(`destroy`)过程中，分别会轮询调用对应的`hooks`方法，这些`hooks`中一部分是指令声明周期的入口。
 
 ```JavaScript
-JavaScript复制代码// src/core/vdom/patch.js
+// src/core/vdom/patch.js
 const hooks = ['create', 'activate', 'update', 'remove', 'destroy']
 export function createPatchFunction (backend) {
   let i, j
@@ -84,7 +84,7 @@ export function createPatchFunction (backend) {
     // ...
   }
 }
-复制代码
+
 ```
 
 ### 模板编译
@@ -92,7 +92,7 @@ export function createPatchFunction (backend) {
 模板编译就是解析指令参数，具体解构后的`ASTElement`如下所示：
 
 ```JavaScript
-JavaScript复制代码{
+{
   tag: 'input',
   parent: ASTElement,
   directives: [
@@ -126,7 +126,7 @@ JavaScript复制代码{
 `vue`推荐采用指令的方式去操作`DOM`，由于自定义指令可能会修改`DOM`或者属性，所以避免指令对模板解析的影响，在生成渲染方法时，首先处理的是指令，如`v-model`，本质是一个语法糖，在拼接渲染函数时，会给元素加上`value`属性与`input`事件（以`input`为例，这个也可以用户自定义）。
 
 ```JavaScript
-JavaScript复制代码with (this) {
+with (this) {
     return _c('div', {
         attrs: {
             "id": "app"
@@ -172,7 +172,7 @@ JavaScript复制代码with (this) {
 在`patch`过程中，每此调用`createElm`生成真实`DOM`时，都会检测当前`VNode`是否存在`data`属性，存在，则会调用`invokeCreateHooks`，走初创建的钩子函数，核心代码如下：
 
 ```JavaScript
-JavaScript复制代码// src/core/vdom/patch.js
+// src/core/vdom/patch.js
 function createElm (
     vnode,
     insertedVnodeQueue,
@@ -204,7 +204,7 @@ function createElm (
 以上是指令钩子方法的第一个入口，是时候揭露`directive.js`神秘的面纱了，核心代码如下：
 
 ```JavaScript
-JavaScript复制代码// src/core/vdom/modules/directives.js
+// src/core/vdom/modules/directives.js
 
 // 默认抛出的都是updateDirectives方法
 export default {
@@ -305,7 +305,7 @@ function _update (oldVnode, vnode) {
 核心代码如下：
 
 ```JavaScript
-JavaScript复制代码// src/core/vdom/patch.js
+// src/core/vdom/patch.js
 function patchVnode (
     oldVnode,
     vnode,

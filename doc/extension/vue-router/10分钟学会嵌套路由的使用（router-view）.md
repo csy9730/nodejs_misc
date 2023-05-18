@@ -26,7 +26,7 @@
 - 主页面：App.vue,
 
 ```xml
-复制代码<template>
+<template>
   <div id="app">
     <router-view></router-view>
    <router-link :to="{name:'H1'}">H1页面</router-link>
@@ -40,7 +40,7 @@
 - 默认展示页面
 
 ```xml
-复制代码<template>
+<template>
   <div class="hello">
     <img src="./assets/logo.png">
     <h1>{{ msg }}</h1>
@@ -66,7 +66,7 @@ export default {
 - 点击展示的H1,H2
 
 ```javascript
-复制代码//h1
+//h1
 <template>
     <div class="hellow">
         <h1>{{msg}}</h1>
@@ -103,7 +103,7 @@ export default {
 ### 超级重点，配置路由文件
 
 ```css
-复制代码 routes: [
+ routes: [
     {
       path: '/',
       name: 'HelloWorld',

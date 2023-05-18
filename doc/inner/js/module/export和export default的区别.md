@@ -25,7 +25,7 @@ ES6中，在JavaScript ES6中，export与export default均可用于导出常量�
 下面是一个js文件，里面使用export命令来输出变量，函数或类（class）
 
 ```javascript
-javascript复制代码//a.js
+//a.js
 export var str = "export的内容";
 export  var year =2019;
 export function message(sth) {
@@ -35,8 +35,8 @@ export function message(sth) {
 
 除了上述的写法，还有一种推荐使用的，因为这样就可以在脚本尾部，一眼看清楚输出了哪些变量。
 
-```ini
-ini复制代码//a.js
+```js
+//a.js
  var str = "export的内容";
  var year =2019;
  function message(sth) {
@@ -48,7 +48,7 @@ export {str,year,message}
 通常情况下，export输出的变量就是本来的名字，但是可以使用as关键字重命名。
 
 ```javascript
-javascript复制代码//a.js
+//a.js
  var str = "export的内容";
  var year =2019;
  function message(sth) {
@@ -68,7 +68,7 @@ export {
 使用export命令定义了模块的对外接口以后，其他 JS 文件就可以通过import命令加载这个模块。
 
 ```javascript
-javascript复制代码//b.js
+//b.js
 import { str,year, message } from './a';
  //也可以分开写两次，导入的时候带花括号，将每个变量函数名写清楚
 ```
@@ -78,7 +78,7 @@ import { str,year, message } from './a';
 如果想为输入的变量重新取一个名字，import命令要使用as关键字，将输入的变量重命名。
 
 ```javascript
-javascript复制代码//b.js
+//b.js
 import { str as newname1,
 year as newname2,
 message as newname3
@@ -88,7 +88,7 @@ message as newname3
 import后面的from指定模块文件的位置，可以是相对路径，也可以是绝对路径，.js后缀可以省略。 如果只是模块名，不带有路径，那么必须有配置文件，告诉 JavaScript 引擎该模块的位置。
 
 ```javascript
-javascript复制代码//import引入一个依赖包，不需要相对路径。
+//import引入一个依赖包，不需要相对路径。
 import axios from ‘axios’;
 //import 引入一个自己写的js文件，是需要相对路径的。
 import AppService from ‘./appService’;
@@ -99,7 +99,7 @@ import AppService from ‘./appService’;
 export default命令用于指定模块的`默认输出`。显然，一个模块只能有一个默认输出，因此export default命令只能使用一次。所以，import命令后面才不用加大括号，因为只可能唯一对应export default命令。`一个文件内不能有多个export default`。
 
 ```javascript
-javascript复制代码//a.js
+//a.js
 const str = "export default的内容";
 export default str
 在另一个文件中的导入方式： 
